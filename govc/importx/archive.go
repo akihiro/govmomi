@@ -91,6 +91,10 @@ func (t *TapeArchiveEntry) Close() error {
 	return t.f.Close()
 }
 
+func NewTapeArchive(fpath string) *TapeArchive {
+	return &TapeArchive{path: fpath}
+}
+
 func (t *TapeArchive) Open(name string) (io.ReadCloser, int64, error) {
 	f, _, err := t.OpenFile(t.path)
 	if err != nil {
@@ -126,6 +130,10 @@ func (t *TapeArchive) Open(name string) (io.ReadCloser, int64, error) {
 type FileArchive struct {
 	path string
 	Opener
+}
+
+func NewFileArchive(fpath string) *FileArchive {
+	return &FileArchive{path: fpath}
 }
 
 func (t *FileArchive) Open(name string) (io.ReadCloser, int64, error) {
